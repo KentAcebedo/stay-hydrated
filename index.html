@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hydration Tracker</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="bg-blobs">
+    <div class="blob blob1"></div>
+    <div class="blob blob2"></div>
+    <div class="blob blob3"></div>
+  </div>
+
+  <main>
+    <header>
+      <p class="label">Daily Goal</p>
+      <h1>Stay<br/>Hydrated.</h1>
+      <p class="subtitle">9 glasses · 250ml each · 2,250ml total</p>
+    </header>
+
+    <section class="counter-section">
+      <div class="count-display">
+        <span id="count">0</span>
+        <span class="count-sep">/</span>
+        <span class="count-total">9</span>
+      </div>
+      <p class="count-label">glasses of water</p>
+      <div class="ml-bar-wrap">
+        <div class="ml-bar"><div class="ml-fill" id="ml-fill"></div></div>
+        <span class="ml-text" id="ml-text">0 ml / 2,250 ml</span>
+      </div>
+    </section>
+
+    <section class="glass-section">
+      <div class="glass-container" id="glass-container">
+        <div class="glass-wrap">
+          <svg class="glass-svg" id="main-glass" viewBox="0 0 120 160" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <clipPath id="glassClip">
+                <path d="M18,10 L10,148 Q10,154 18,154 L102,154 Q110,154 110,148 L102,10 Z"/>
+              </clipPath>
+              <linearGradient id="waterGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#5FCFB0"/>
+                <stop offset="100%" stop-color="#1a9e80"/>
+              </linearGradient>
+              <linearGradient id="glassGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stop-color="#ffffff" stop-opacity="0.15"/>
+                <stop offset="50%" stop-color="#ffffff" stop-opacity="0.04"/>
+                <stop offset="100%" stop-color="#ffffff" stop-opacity="0.12"/>
+              </linearGradient>
+            </defs>
+            <!-- Glass body -->
+            <path class="glass-body" d="M18,10 L10,148 Q10,154 18,154 L102,154 Q110,154 110,148 L102,10 Z"/>
+            <!-- Water fill -->
+            <rect class="water-fill" id="water-fill" x="10" y="154" width="100" height="0" clip-path="url(#glassClip)" fill="url(#waterGrad)"/>
+            <!-- Water wave top -->
+            <path class="wave" id="wave" d="M10,154 Q30,150 55,154 Q80,158 110,154" clip-path="url(#glassClip)" fill="none" stroke="url(#waterGrad)" stroke-width="2"/>
+            <!-- Glass shine -->
+            <path d="M18,10 L10,148 Q10,154 18,154 L102,154 Q110,154 110,148 L102,10 Z" fill="url(#glassGrad)"/>
+            <!-- Rim -->
+            <line x1="18" y1="10" x2="102" y2="10" stroke="rgba(255,255,255,0.4)" stroke-width="2" stroke-linecap="round"/>
+            <!-- Bubbles -->
+            <circle class="bubble" cx="40" cy="130" r="3" fill="rgba(255,255,255,0.3)"/>
+            <circle class="bubble" cx="70" cy="110" r="2" fill="rgba(255,255,255,0.25)"/>
+            <circle class="bubble" cx="55" cy="140" r="2.5" fill="rgba(255,255,255,0.2)"/>
+          </svg>
+          <div class="glass-pct" id="glass-pct">0%</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="timer-section">
+      <div class="timer-card" id="timer-card">
+        <div class="timer-icon">💧</div>
+        <div class="timer-info">
+          <p class="timer-label" id="timer-label">Next glass in</p>
+          <div class="timer-countdown" id="timer-countdown">--:--:--</div>
+          <p class="timer-sublabel" id="timer-sublabel">Stay on schedule!</p>
+        </div>
+        <div class="timer-ring-wrap">
+          <svg class="timer-ring" viewBox="0 0 60 60">
+            <circle cx="30" cy="30" r="25" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="4"/>
+            <circle id="ring-progress" cx="30" cy="30" r="25" fill="none" stroke="#5FCFB0" stroke-width="4"
+              stroke-dasharray="157" stroke-dashoffset="157" stroke-linecap="round"
+              transform="rotate(-90 30 30)"/>
+          </svg>
+        </div>
+      </div>
+    </section>
+
+    <section class="dots-section">
+      <div class="dots-row" id="dots-row"></div>
+      <p class="dots-hint">tap to log · tap again to undo</p>
+    </section>
+
+    <section class="schedule-section">
+      <h2>Today's Schedule</h2>
+      <ul class="schedule-list" id="schedule-list"></ul>
+    </section>
+
+    <section class="actions">
+      <button class="btn-log" id="btn-log" onclick="logWater()">
+        <span class="btn-icon">＋</span> Log a glass
+      </button>
+      <button class="btn-reset" onclick="resetAll()">Reset day</button>
+    </section>
+  </main>
+
+  <div class="toast" id="toast"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>
