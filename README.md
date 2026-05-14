@@ -2,6 +2,8 @@
 
 A simple, beautiful water intake tracker to help you drink 9 glasses (2,250ml) a day.
 
+Link: https://stay-hydratedd.netlify.app/
+
 ## Features
 
 - **Live countdown timer** to your next glass of water
